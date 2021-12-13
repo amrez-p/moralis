@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { MoralisProvider } from "react-moralis";
+
+const theme = extendTheme({
+  config: {
+    initialColorMode: "dark",
+  },
+});
+
+const serverUrl = "https://zxl1feqd0x8b.usemoralis.com:2053/server";
+const appId = "OVlW7ryB9Mnf7eCN9jbS0fVt2EOfFC7xfiaYbMHC";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MoralisProvider appId={appId} serverUrl={serverUrl}>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </MoralisProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
